@@ -1,3 +1,7 @@
+Requirements
+----------
+* java 1.7
+
 Production Quality Software	 	
 
 Professor Schidlowsky
