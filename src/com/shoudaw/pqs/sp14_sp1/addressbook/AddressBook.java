@@ -207,6 +207,14 @@ public class AddressBook {
     this.fromJson(jsonStr);
   }
   
+  /**
+   * Removes all of the contact from this address book. 
+   * The address book will be empty after this call returns.
+   */
+  public void clear(){
+    this.data.clear();
+  }
+  
 
   protected String toJson(){
     String jsonStr = gson.toJson(data);

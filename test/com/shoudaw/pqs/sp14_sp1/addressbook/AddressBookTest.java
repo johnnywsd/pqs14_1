@@ -8,8 +8,9 @@ import static org.junit.Assert.*;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import org.junit.After;
 import org.junit.AfterClass;
-import org.junit.BeforeClass;
+import org.junit.Before;
 import org.junit.Test;
 
 import com.google.gson.JsonSyntaxException;
@@ -23,8 +24,9 @@ public class AddressBookTest {
   private static AddressBook addressBook = new AddressBook();
   private static Contact contact1 = new Contact();
   private static Contact contact2 = new Contact();
-  @BeforeClass
-  public static void testSetup() throws InvalidPhone, InvalidEmail {
+
+  @Before
+  public void testSetup() throws InvalidPhone, InvalidEmail {
 
     contact1 = new Contact();
     contact1.setName("Shouda Wang");
@@ -40,6 +42,10 @@ public class AddressBookTest {
     contact2.setEmail("shoudaw@gmail.com");
     contact2.setNote("NYU Student");
     addressBook.addContact(contact2);
+  }
+  @After
+  public void clean(){
+    addressBook.clear();
   }
   
   @AfterClass
@@ -108,6 +114,14 @@ public class AddressBookTest {
     String filename = "./data_err_1.json";
     AddressBook ab = new AddressBook();
     ab.load(filename);
+  }
+
+  @Test(expected = JsonSyntaxException.class)
+  public void testLoadError2() throws IOException{
+    String filename = "./data_err_2.json";
+    AddressBook ab = new AddressBook();
+    ab.load(filename);
+    assertEquals("load, size:", addressBook.getNumOfContacts(), 2);
   }
 
 }
