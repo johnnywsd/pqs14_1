@@ -11,6 +11,9 @@ import java.nio.file.Paths;
 
 
 public class SDWFileUtils {
+  
+  // Suppress default constructor for nonistantiability
+  private SDWFileUtils(){ }
 
   public static String readFileAsString(String path) 
       throws IOException {

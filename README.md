@@ -1,6 +1,6 @@
 Requirements
 ----------
-* java 1.7
+* Java 1.7
 
 Production Quality Software	 	
 
