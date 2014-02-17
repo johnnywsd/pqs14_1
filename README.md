@@ -1,3 +1,7 @@
+Compile
+----------
+    $ ant -f build.xml
+
 Requirements
 ----------
 * Java 1.7
