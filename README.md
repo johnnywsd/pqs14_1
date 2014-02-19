@@ -1,6 +1,7 @@
 Compile
 ----------
     $ ant -f build.xml
+You will get AddressBook.jar at /path/to/project/bin/jar/AddressBook.jar
 
 Requirements
 ----------

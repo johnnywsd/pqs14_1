@@ -216,11 +216,20 @@ public class AddressBook {
   }
   
 
+  /**
+   * Convert the contacts data to JSON string.
+   * @return a JSON string
+   */
   protected String toJson(){
     String jsonStr = gson.toJson(data);
     return jsonStr;
   }
   
+  /**
+   * Load contacts data from JSON string
+   * @param jsonStr The input JSON string
+   * @throws JsonSyntaxException When JSON string cannot be parsed
+   */
   protected void fromJson(String jsonStr) throws JsonSyntaxException{
     try{
       HashMap<String, Contact> data = 
