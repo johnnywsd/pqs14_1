@@ -97,6 +97,16 @@ public class AddressBookTest {
       assertEquals("Name:", item.getName(), name);
     }
   }
+  @Test
+  public void testSearchByAny(){
+    String name = "Shouda Wang";
+    ArrayList<Contact> c = addressBook.findAllContact(name);
+    assertEquals("FindByName, size:", c.size(), 2);
+
+    for (Contact item : c){
+      assertEquals("Name:", item.getName(), name);
+    }
+  }
 
   @Test
   public void testRemove(){

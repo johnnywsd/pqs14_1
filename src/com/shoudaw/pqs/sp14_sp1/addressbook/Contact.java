@@ -2,7 +2,7 @@ package com.shoudaw.pqs.sp14_sp1.addressbook;
 
 import com.google.gson.annotations.Expose;
 
-public class Contact implements Cloneable{
+public class Contact {
   @Expose
   private static final String PHONE_PATTERN = "[0-9\\s\\-()\\+]*";
 
@@ -123,12 +123,6 @@ public class Contact implements Cloneable{
     this.note = note.trim();
   }
 
-
-  @Override
-  protected Object clone() throws CloneNotSupportedException {
-    // TODO Auto-generated method stub
-    return super.clone();
-  }
 
   @Override
   public String toString() {

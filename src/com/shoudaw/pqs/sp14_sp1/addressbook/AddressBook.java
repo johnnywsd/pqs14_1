@@ -3,6 +3,7 @@ package com.shoudaw.pqs.sp14_sp1.addressbook;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.HashMap;
 import java.util.UUID;
@@ -152,8 +153,8 @@ public class AddressBook {
    * findAllContactByEmail(..), findAllContactByAddress, etc
    * @param by The properties to search. NAME, EMAIL, ADDRESS, etc.
    * @param target The search key word.
-   * @return An ArrayList of Contact objects (reference of the Contact
-   * objects in this AddressBook instance.
+   * @return An ArrayList of Contact objects
+   * (references of the Contact objects in this AddressBook instance.)
    */
   public ArrayList<Contact> findAllContact(
       Contact.Properties by, String target){
@@ -186,7 +187,28 @@ public class AddressBook {
     }
     return ret;
   }
-
+  
+  /**
+   * Find all contacts by all Fields
+   * The property must be exactly same as the key word provided
+   * @param target The search key word.
+   * @return An ArrayList of Contact objects 
+   * (references of the Contact objects in this AddressBook instance.)
+   */
+  public ArrayList<Contact> findAllContact(String target){
+    ArrayList<Contact> ret = null;
+    HashSet<Contact> set = new HashSet<Contact>();
+    for (Contact.Properties property : Contact.Properties.values()){
+      ArrayList<Contact> tmp = this.findAllContact(property, target);
+      for (Contact contact: tmp){
+        set.add(contact);
+      }
+    }
+    ret = new ArrayList<Contact>(set);
+    return ret;
+  }
+  
+  
   /**
    * Find all contacts by its name
    * @param name Contact's name
