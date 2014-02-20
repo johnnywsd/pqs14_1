@@ -42,7 +42,9 @@ public class AddressBook {
   
 
   /**
-   * Add a contact to AddressBook
+   * Add a contact to AddressBook. AddressBook instance keeps references
+   * of the Contact instances. An ID will be generated and this ID is also
+   * store in the Contact instance. You can get this ID by contact.getId()
    * @param contact Contact object to add
    * @return The ID of that contact 
    */
@@ -65,6 +67,62 @@ public class AddressBook {
   }
   
   /**
+   * Update(Overwrite) a contact in this AddressBook instance.
+   * @param id The ID of the contact object in this AddressBook instance.
+   * @param contact The new contact object.
+   * @return
+   */
+  public boolean updateContact(String id, Contact contact){
+    Contact old = data.get(id);
+    if (old != null){
+      contact.id = old.getId();
+      data.put(id, contact);
+      return true;
+    }else{
+      return false;
+    }
+  }
+  
+  /**
+   * Set new value for a specific property. 
+   * @param id The ID of the contact in this AddressBook instant
+   * @param property The properties to search. NAME, EMAIL, ADDRESS, etc. 
+   * @param value The new Value
+   * @return True, if the contact is found and successfully updated.
+   * False, if no contacts with this ID are found.
+   * @throws InvalidPhone
+   * @throws InvalidEmail
+   */
+  public boolean updataContact(
+      String id,
+      Contact.Properties property,
+      String value) throws InvalidPhone, InvalidEmail{
+    
+    Contact contact = data.get(id);
+    if (contact != null){
+      if (property == Contact.Properties.ADDRESS){
+        contact.setAddress(value);
+      }
+      if(property == Contact.Properties.NAME){
+        contact.setAddress(value);
+      }else if(property == Contact.Properties.PHONE){
+        contact.setPhone(value);
+      }else if(property == Contact.Properties.EMAIL){
+        contact.setEmail(value);
+      }else if (property == Contact.Properties.ADDRESS){
+        contact.setAddress(value);
+      }else if(property == Contact.Properties.NOTE){
+        contact.setNote(value);
+      }else{
+        return false;
+      }
+      return true;
+    }else{
+      return false;
+    }
+  }
+  
+  /**
    * Delete a contact by its ID. If there is no associated with this ID. 
    * @param id The ID of the contact to delete.
    * @return the previous value associated with id, 
@@ -81,7 +139,7 @@ public class AddressBook {
   /**
    * Get a contact by its ID
    * @param id
-   * @return
+   * @return A reference of Contact object in this AddreeBook instance
    */
   public Contact getContactById(String id){
     return data.get(id);
@@ -94,7 +152,8 @@ public class AddressBook {
    * findAllContactByEmail(..), findAllContactByAddress, etc
    * @param by The properties to search. NAME, EMAIL, ADDRESS, etc.
    * @param target The search key word.
-   * @return An ArrayList of Contact objects. 
+   * @return An ArrayList of Contact objects (reference of the Contact
+   * objects in this AddressBook instance.
    */
   public ArrayList<Contact> findAllContact(
       Contact.Properties by, String target){
@@ -132,6 +191,7 @@ public class AddressBook {
    * Find all contacts by its name
    * @param name Contact's name
    * @return An ArrayList of Contact objects. 
+   * (references of the Contact objects in this AddressBook instance) 
    */
   public ArrayList<Contact> findAllContactByName(String name){
     ArrayList<Contact> ret = 
@@ -142,7 +202,8 @@ public class AddressBook {
   /**
    * Find all contacts by its phone
    * @param name Contact's phone
-   * @return An ArrayList of Contact objects. 
+   * @return An ArrayList of Contact objects.
+   * (references of the Contact objects in this AddressBook instance) 
    */
   public ArrayList<Contact> findAllContactByPhone(String phone){
     ArrayList<Contact> ret = 
@@ -154,6 +215,7 @@ public class AddressBook {
    * Find all contacts by its address
    * @param name Contact's address
    * @return An ArrayList of Contact objects. 
+   * (references of the Contact objects in this AddressBook instance) 
    */
   public ArrayList<Contact> findAllContactByAddress(String address){
     ArrayList<Contact> ret = 
@@ -165,6 +227,7 @@ public class AddressBook {
    * Find all contacts by its email
    * @param name Contact's email
    * @return An ArrayList of Contact objects. 
+   * (references of the Contact objects in this AddressBook instance) 
    */
   public ArrayList<Contact> findAllContactByEmail(String email){
     ArrayList<Contact> ret = 
@@ -176,6 +239,7 @@ public class AddressBook {
    * Find all contacts by its note
    * @param name Contact's note
    * @return An ArrayList of Contact objects. 
+   * (references of the Contact objects in this AddressBook instance) 
    */
   public ArrayList<Contact> findAllContactByNote(String note){
     ArrayList<Contact> ret = 
@@ -260,7 +324,6 @@ public class AddressBook {
 
     return sb.toString();
   }
-  
   
 
 }
